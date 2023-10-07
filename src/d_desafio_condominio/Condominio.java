@@ -104,6 +104,4 @@ public class Condominio {
 	public void setDespesas(List<Despesa> despesas) {
 		this.despesas = despesas;
 	}
-	
-	
 }
