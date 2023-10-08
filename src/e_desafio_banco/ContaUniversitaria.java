@@ -1,27 +1,28 @@
 package e_desafio_banco;
 
-import javax.swing.JOptionPane;
-
 public class ContaUniversitaria extends Conta {
 
-	private final double limite = 2000.0;
-	
+	private final double limiteSaldo = 2000.0;
+
 	public ContaUniversitaria() {
 		super();
+		tipo = "Universitaria";
 	}
 
 	@Override
 	public void depositar() {
-		double valorDeposito = Double.parseDouble(JOptionPane.showInputDialog("Quanto deseja depositar? (R$)"));
-		if (saldo + valorDeposito <= limite) {
+		double valorDeposito = Double.parseDouble(Util.obterEntradaUsuario(
+				saldoAtual() + "Limite de saldo: R$ " + limiteSaldo + "\nQuanto deseja depositar? (R$)"));
+		if (saldo + valorDeposito <= limiteSaldo) {
 			saldo += valorDeposito;
+			movimentacoes.add(new Movimentacao("Deposito", valorDeposito, saldo));
 		} else {
-			JOptionPane.showMessageDialog(null, "Limite ultrapassado!");
+			Util.exibirMensagem("Limite ultrapassado!");
 		}
 	}
-	
+
 	@Override
-	public String toString() {
-		return "Conta Universitaria: num. " + numero + " | ag. " + agencia + " | saldo: R$ " + saldo + " | limite R$: " + limite;
+	public String dadosConta() {
+		return super.dadosConta() + "Limite saldo: R$ " + limiteSaldo + "\n";
 	}
 }
